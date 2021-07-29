@@ -1,11 +1,14 @@
 package com.luizcasagrande.shoppingapi.controller;
 
 import com.luizcasagrande.shoppingapi.dto.ShopDTO;
+import com.luizcasagrande.shoppingapi.dto.ShopReportDTO;
 import com.luizcasagrande.shoppingapi.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,5 +40,22 @@ public class ShopController {
     @PostMapping("/shopping")
     public ShopDTO newShop(@Valid @RequestBody ShopDTO dto) {
         return service.save(dto);
+    }
+
+    @GetMapping("/shopping/search")
+    public List<ShopDTO> getShopsByFilter(@RequestParam("dataInicio")
+                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
+                                          @RequestParam(name = "dataFim", required = false)
+                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim,
+                                          @RequestParam(name = "valorMinimo", required = false) Float valorMinimo) {
+        return service.getShopsByFilter(dataInicio, dataFim, valorMinimo);
+    }
+
+    @GetMapping("/shopping/report")
+    public ShopReportDTO getReportByDate(@RequestParam("dataInicio")
+                                         @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
+                                         @RequestParam("dataFim")
+                                         @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim) {
+        return service.getReportByDate(dataInicio, dataFim);
     }
 }

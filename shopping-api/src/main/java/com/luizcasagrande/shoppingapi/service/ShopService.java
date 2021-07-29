@@ -2,11 +2,13 @@ package com.luizcasagrande.shoppingapi.service;
 
 import com.luizcasagrande.shoppingapi.dto.ItemDTO;
 import com.luizcasagrande.shoppingapi.dto.ShopDTO;
+import com.luizcasagrande.shoppingapi.dto.ShopReportDTO;
 import com.luizcasagrande.shoppingapi.model.Shop;
 import com.luizcasagrande.shoppingapi.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,5 +53,17 @@ public class ShopService {
         Shop shop = Shop.convert(dto);
         shop = repository.save(shop);
         return ShopDTO.convert(shop);
+    }
+
+    public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
+        List<Shop> compras = repository.getShopByFilters(dataInicio, dataFim, valorMinimo);
+        return compras.stream()
+                .map(ShopDTO::convert)
+                .collect(Collectors.toList());
+
+    }
+
+    public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
+        return repository.getReportByDate(dataInicio, dataFim);
     }
 }
