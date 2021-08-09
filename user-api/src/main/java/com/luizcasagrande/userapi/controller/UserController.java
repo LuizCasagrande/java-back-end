@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    public UserDTO delete(@PathVariable Long id) {
-        return service.delete(id);
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 
     @GetMapping("/user/search")

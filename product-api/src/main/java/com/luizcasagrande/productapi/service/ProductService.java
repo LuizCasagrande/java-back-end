@@ -4,6 +4,8 @@ import com.luizcasagrande.productapi.converter.DTOConverter;
 import com.luizcasagrande.productapi.model.Product;
 import com.luizcasagrande.productapi.repository.ProductRepository;
 import com.luizcasagrande.shoppingclient.dto.ProductDTO;
+import com.luizcasagrande.shoppingclient.exception.CategoryNotFoundException;
+import com.luizcasagrande.shoppingclient.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,20 +35,25 @@ public class ProductService {
 
     public ProductDTO findByProductIdentifier(String productIdentifier) {
         Product produto = repository.findByProductIdentifier(productIdentifier);
-        if (produto != null) {
-            return DTOConverter.convert(produto);
+        if (produto == null) {
+            throw new ProductNotFoundException();
         }
-        return null;
+        return DTOConverter.convert(produto);
     }
 
     public ProductDTO save(ProductDTO dto) {
+        boolean existsCategory = repository.existsById(dto.getCategory().getId());
+        if (!existsCategory) {
+            throw new CategoryNotFoundException();
+        }
         Product produto = repository.save(Product.convert(dto));
         return DTOConverter.convert(produto);
     }
 
-    public ProductDTO delete(long id) {
+    public void delete(long id) {
         Optional<Product> produto = repository.findById(id);
-        produto.ifPresent(p -> repository.delete(p));
-        return null;
+        produto.ifPresentOrElse(p -> repository.delete(p), () -> {
+            throw new ProductNotFoundException();
+        });
     }
 }

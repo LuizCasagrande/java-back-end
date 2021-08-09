@@ -9,9 +9,7 @@ public class ShopDTO {
 
     @NotBlank
     private String userIdentifier;
-    @NotNull
     private Float total;
-    @NotNull
     private Date data;
     @NotNull
     private List<ItemDTO> itens;

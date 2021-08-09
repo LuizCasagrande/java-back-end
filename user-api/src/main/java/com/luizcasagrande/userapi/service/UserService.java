@@ -1,6 +1,7 @@
 package com.luizcasagrande.userapi.service;
 
 import com.luizcasagrande.shoppingclient.dto.UserDTO;
+import com.luizcasagrande.shoppingclient.exception.UserNotFoundException;
 import com.luizcasagrande.userapi.converter.DTOConverter;
 import com.luizcasagrande.userapi.model.User;
 import com.luizcasagrande.userapi.repository.UserRepository;
@@ -34,10 +35,11 @@ public class UserService {
         return DTOConverter.convert(user);
     }
 
-    public UserDTO delete(long id) {
+    public void delete(long id) {
         Optional<User> usuario = repository.findById(id);
-        usuario.ifPresent(u -> repository.delete(u));
-        return null;
+        usuario.ifPresentOrElse(u -> repository.delete(u), () -> {
+            throw new UserNotFoundException();
+        });
     }
 
     public UserDTO findByCpf(String cpf) {
@@ -45,7 +47,7 @@ public class UserService {
         if (usuario != null) {
             return DTOConverter.convert(usuario);
         }
-        return null;
+        throw new UserNotFoundException();
     }
 
     public List<UserDTO> queryByNome(String nome) {
