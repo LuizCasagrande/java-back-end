@@ -4,6 +4,7 @@ import com.luizcasagrande.shoppingapi.converter.DTOConverter;
 import com.luizcasagrande.shoppingapi.model.Shop;
 import com.luizcasagrande.shoppingapi.repository.ShopRepository;
 import com.luizcasagrande.shoppingclient.dto.ItemDTO;
+import com.luizcasagrande.shoppingclient.dto.ProductDTO;
 import com.luizcasagrande.shoppingclient.dto.ShopDTO;
 import com.luizcasagrande.shoppingclient.dto.ShopReportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class ShopService {
 
     @Autowired
     private ShopRepository repository;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     public List<ShopDTO> getAll() {
         List<Shop> compras = repository.findAll();
@@ -47,6 +52,13 @@ public class ShopService {
     }
 
     public ShopDTO save(ShopDTO dto) {
+        if (userService.getUserByCpf(dto.getUserIdentifier()) == null) {
+            return null;
+        }
+        if (!validateProducts(dto.getItens())) {
+            return null;
+        }
+
         dto.setTotal(dto.getItens().stream()
                 .map(ItemDTO::getPreco)
                 .reduce((float) 0, Float::sum));
@@ -54,6 +66,17 @@ public class ShopService {
         Shop shop = Shop.convert(dto);
         shop = repository.save(shop);
         return DTOConverter.convert(shop);
+    }
+
+    private boolean validateProducts(List<ItemDTO> itens) {
+        for (ItemDTO item : itens) {
+            ProductDTO productDTO = productService.getProductByIdentifier(item.getProductIdentifier());
+            if (productDTO == null) {
+                return false;
+            }
+            item.setPreco(productDTO.getPreco());
+        }
+        return true;
     }
 
     public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
