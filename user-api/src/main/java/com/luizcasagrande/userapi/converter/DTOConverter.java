@@ -13,6 +13,7 @@ public class DTOConverter {
         dto.setEmail(user.getEmail());
         dto.setTelefone(user.getTelefone());
         dto.setDataCadastro(user.getDataCadastro());
+        dto.setKey(user.getKey());
         return dto;
     }
 }

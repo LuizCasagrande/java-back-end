@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,7 @@ public class UserService {
     }
 
     public UserDTO save(UserDTO dto) {
+        dto.setKey(UUID.randomUUID().toString());
         User user = repository.save(User.convert(dto));
         return DTOConverter.convert(user);
     }
@@ -42,8 +44,8 @@ public class UserService {
         });
     }
 
-    public UserDTO findByCpf(String cpf) {
-        User usuario = repository.findByCpf(cpf);
+    public UserDTO findByCpfAndKey(String cpf, String key) {
+        User usuario = repository.findByCpfAndKey(cpf, key);
         if (usuario != null) {
             return DTOConverter.convert(usuario);
         }

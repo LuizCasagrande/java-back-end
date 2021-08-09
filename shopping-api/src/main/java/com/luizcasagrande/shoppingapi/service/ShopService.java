@@ -51,8 +51,8 @@ public class ShopService {
         return compra.map(DTOConverter::convert).orElse(null);
     }
 
-    public ShopDTO save(ShopDTO dto) {
-        if (userService.getUserByCpf(dto.getUserIdentifier()) == null) {
+    public ShopDTO save(ShopDTO dto, String key) {
+        if (userService.getUserByCpfAndKey(dto.getUserIdentifier(), key) == null) {
             return null;
         }
         if (!validateProducts(dto.getItens())) {

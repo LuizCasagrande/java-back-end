@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/user/cpf/{cpf}")
-    public UserDTO findByCpf(@PathVariable String cpf) {
-        return service.findByCpf(cpf);
+    public UserDTO findByCpfAndKey(@PathVariable String cpf, @RequestParam("key") String key) {
+        return service.findByCpfAndKey(cpf, key);
     }
 
     @DeleteMapping("/user/{id}")
