@@ -1,6 +1,6 @@
 package com.luizcasagrande.shoppingapi.model;
 
-import com.luizcasagrande.shoppingapi.dto.ItemDTO;
+import com.luizcasagrande.shoppingclient.dto.ItemDTO;
 
 import javax.persistence.Embeddable;
 

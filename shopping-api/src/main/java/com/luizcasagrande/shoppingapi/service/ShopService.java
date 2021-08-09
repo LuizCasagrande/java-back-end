@@ -1,10 +1,11 @@
 package com.luizcasagrande.shoppingapi.service;
 
-import com.luizcasagrande.shoppingapi.dto.ItemDTO;
-import com.luizcasagrande.shoppingapi.dto.ShopDTO;
-import com.luizcasagrande.shoppingapi.dto.ShopReportDTO;
+import com.luizcasagrande.shoppingapi.converter.DTOConverter;
 import com.luizcasagrande.shoppingapi.model.Shop;
 import com.luizcasagrande.shoppingapi.repository.ShopRepository;
+import com.luizcasagrande.shoppingclient.dto.ItemDTO;
+import com.luizcasagrande.shoppingclient.dto.ShopDTO;
+import com.luizcasagrande.shoppingclient.dto.ShopReportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,27 +23,27 @@ public class ShopService {
     public List<ShopDTO> getAll() {
         List<Shop> compras = repository.findAll();
         return compras.stream()
-                .map(ShopDTO::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public List<ShopDTO> getByUser(String userIdentifier) {
         List<Shop> compras = repository.findByUserIdentifier(userIdentifier);
         return compras.stream()
-                .map(ShopDTO::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public List<ShopDTO> getByData(ShopDTO dto) {
         List<Shop> compras = repository.findByDataGreaterThan(dto.getData());
         return compras.stream()
-                .map(ShopDTO::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public ShopDTO findById(long productId) {
         Optional<Shop> compra = repository.findById(productId);
-        return compra.map(ShopDTO::convert).orElse(null);
+        return compra.map(DTOConverter::convert).orElse(null);
     }
 
     public ShopDTO save(ShopDTO dto) {
@@ -52,13 +53,13 @@ public class ShopService {
 
         Shop shop = Shop.convert(dto);
         shop = repository.save(shop);
-        return ShopDTO.convert(shop);
+        return DTOConverter.convert(shop);
     }
 
     public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
         List<Shop> compras = repository.getShopByFilters(dataInicio, dataFim, valorMinimo);
         return compras.stream()
-                .map(ShopDTO::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
 
     }

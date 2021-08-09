@@ -1,6 +1,6 @@
 package com.luizcasagrande.productapi.model;
 
-import com.luizcasagrande.productapi.dto.CategoryDTO;
+import com.luizcasagrande.shoppingclient.dto.CategoryDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,8 +1,8 @@
 package com.luizcasagrande.shoppingapi.controller;
 
-import com.luizcasagrande.shoppingapi.dto.ShopDTO;
-import com.luizcasagrande.shoppingapi.dto.ShopReportDTO;
 import com.luizcasagrande.shoppingapi.service.ShopService;
+import com.luizcasagrande.shoppingclient.dto.ShopDTO;
+import com.luizcasagrande.shoppingclient.dto.ShopReportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;

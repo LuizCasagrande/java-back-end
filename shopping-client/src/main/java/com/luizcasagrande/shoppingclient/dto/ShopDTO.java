@@ -1,12 +1,9 @@
-package com.luizcasagrande.shoppingapi.dto;
-
-import com.luizcasagrande.shoppingapi.model.Shop;
+package com.luizcasagrande.shoppingclient.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShopDTO {
 
@@ -18,17 +15,6 @@ public class ShopDTO {
     private Date data;
     @NotNull
     private List<ItemDTO> itens;
-
-    public static ShopDTO convert(Shop shop) {
-        ShopDTO dto = new ShopDTO();
-        dto.setUserIdentifier(shop.getUserIdentifier());
-        dto.setTotal(shop.getTotal());
-        dto.setData(shop.getData());
-        dto.setItens(shop.getItens().stream()
-                .map(ItemDTO::convert)
-                .collect(Collectors.toList()));
-        return dto;
-    }
 
     public String getUserIdentifier() {
         return userIdentifier;

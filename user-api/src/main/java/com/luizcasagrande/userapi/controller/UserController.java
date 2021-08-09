@@ -1,6 +1,6 @@
 package com.luizcasagrande.userapi.controller;
 
-import com.luizcasagrande.userapi.dto.UserDto;
+import com.luizcasagrande.shoppingclient.dto.UserDTO;
 import com.luizcasagrande.userapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,32 +14,32 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/user")
-    public List<UserDto> getUsers() {
+    public List<UserDTO> getUsers() {
         return service.getAll();
     }
 
     @GetMapping("/user/{id}")
-    public UserDto findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @PostMapping("/user")
-    public UserDto newUser(@RequestBody UserDto dto) {
+    public UserDTO newUser(@RequestBody UserDTO dto) {
         return service.save(dto);
     }
 
     @GetMapping("/user/cpf/{cpf}")
-    public UserDto findByCpf(@PathVariable String cpf) {
+    public UserDTO findByCpf(@PathVariable String cpf) {
         return service.findByCpf(cpf);
     }
 
     @DeleteMapping("/user/{id}")
-    public UserDto delete(@PathVariable Long id) {
+    public UserDTO delete(@PathVariable Long id) {
         return service.delete(id);
     }
 
     @GetMapping("/user/search")
-    public List<UserDto> queryByNome(@RequestParam("nome") String nome) {
+    public List<UserDTO> queryByNome(@RequestParam("nome") String nome) {
         return service.queryByNome(nome);
     }
 }

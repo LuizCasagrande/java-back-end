@@ -1,6 +1,7 @@
 package com.luizcasagrande.userapi.service;
 
-import com.luizcasagrande.userapi.dto.UserDto;
+import com.luizcasagrande.shoppingclient.dto.UserDTO;
+import com.luizcasagrande.userapi.converter.DTOConverter;
 import com.luizcasagrande.userapi.model.User;
 import com.luizcasagrande.userapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,41 +17,41 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public List<UserDto> getAll() {
+    public List<UserDTO> getAll() {
         List<User> usuarios = repository.findAll();
         return usuarios.stream()
-                .map(UserDto::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
-    public UserDto findById(long id) {
+    public UserDTO findById(long id) {
         Optional<User> usuario = repository.findById(id);
-        return usuario.map(UserDto::convert).orElse(null);
+        return usuario.map(DTOConverter::convert).orElse(null);
     }
 
-    public UserDto save(UserDto dto) {
+    public UserDTO save(UserDTO dto) {
         User user = repository.save(User.convert(dto));
-        return UserDto.convert(user);
+        return DTOConverter.convert(user);
     }
 
-    public UserDto delete(long id) {
+    public UserDTO delete(long id) {
         Optional<User> usuario = repository.findById(id);
         usuario.ifPresent(u -> repository.delete(u));
         return null;
     }
 
-    public UserDto findByCpf(String cpf) {
+    public UserDTO findByCpf(String cpf) {
         User usuario = repository.findByCpf(cpf);
         if (usuario != null) {
-            return UserDto.convert(usuario);
+            return DTOConverter.convert(usuario);
         }
         return null;
     }
 
-    public List<UserDto> queryByNome(String nome) {
+    public List<UserDTO> queryByNome(String nome) {
         List<User> usuarios = repository.queryByNomeLike(nome);
         return usuarios.stream()
-                .map(UserDto::convert)
+                .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 }

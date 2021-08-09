@@ -1,6 +1,4 @@
-package com.luizcasagrande.productapi.dto;
-
-import com.luizcasagrande.productapi.model.Category;
+package com.luizcasagrande.shoppingclient.dto;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,13 +7,6 @@ public class CategoryDTO {
     @NotNull
     private Long id;
     private String nome;
-
-    public static CategoryDTO convert(Category category) {
-        CategoryDTO dto = new CategoryDTO();
-        dto.setId(category.getId());
-        dto.setNome(category.getNome());
-        return dto;
-    }
 
     public Long getId() {
         return id;

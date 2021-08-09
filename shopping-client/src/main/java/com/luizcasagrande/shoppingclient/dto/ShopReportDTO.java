@@ -1,4 +1,4 @@
-package com.luizcasagrande.shoppingapi.dto;
+package com.luizcasagrande.shoppingclient.dto;
 
 public class ShopReportDTO {
 

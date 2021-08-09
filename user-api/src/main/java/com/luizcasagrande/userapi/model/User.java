@@ -1,6 +1,6 @@
 package com.luizcasagrande.userapi.model;
 
-import com.luizcasagrande.userapi.dto.UserDto;
+import com.luizcasagrande.shoppingclient.dto.UserDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class User {
     private String telefone;
     private Date dataCadastro;
 
-    public static User convert(UserDto dto) {
+    public static User convert(UserDTO dto) {
         User user = new User();
         user.setNome(dto.getNome());
         user.setCpf(dto.getCpf());

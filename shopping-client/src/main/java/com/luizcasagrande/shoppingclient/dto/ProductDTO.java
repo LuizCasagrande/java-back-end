@@ -1,6 +1,4 @@
-package com.luizcasagrande.productapi.dto;
-
-import com.luizcasagrande.productapi.model.Product;
+package com.luizcasagrande.shoppingclient.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,18 +15,6 @@ public class ProductDTO {
     private String productIdentifier;
     @NotNull
     private CategoryDTO category;
-
-    public static ProductDTO convert(Product product) {
-        ProductDTO dto = new ProductDTO();
-        dto.setNome(product.getNome());
-        dto.setPreco(product.getPreco());
-        dto.setDescricao(product.getDescricao());
-        dto.setProductIdentifier(product.getProductIdentifier());
-        if (product.getCategory() != null) {
-            dto.setCategory(CategoryDTO.convert(product.getCategory()));
-        }
-        return dto;
-    }
 
     public String getNome() {
         return nome;

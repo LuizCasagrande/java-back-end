@@ -1,10 +1,8 @@
-package com.luizcasagrande.userapi.dto;
-
-import com.luizcasagrande.userapi.model.User;
+package com.luizcasagrande.shoppingclient.dto;
 
 import java.util.Date;
 
-public class UserDto {
+public class UserDTO {
 
     private String nome;
     private String cpf;
@@ -12,17 +10,6 @@ public class UserDto {
     private String email;
     private String telefone;
     private Date dataCadastro;
-
-    public static UserDto convert(User user) {
-        UserDto dto = new UserDto();
-        dto.setNome(user.getNome());
-        dto.setCpf(user.getCpf());
-        dto.setEndereco(user.getEndereco());
-        dto.setEmail(user.getEmail());
-        dto.setTelefone(user.getTelefone());
-        dto.setDataCadastro(user.getDataCadastro());
-        return dto;
-    }
 
     public String getNome() {
         return nome;

@@ -1,6 +1,6 @@
 package com.luizcasagrande.shoppingapi.model;
 
-import com.luizcasagrande.shoppingapi.dto.ShopDTO;
+import com.luizcasagrande.shoppingclient.dto.ShopDTO;
 
 import javax.persistence.*;
 import java.util.Date;

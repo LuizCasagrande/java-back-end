@@ -1,7 +1,7 @@
 package com.luizcasagrande.shoppingapi.repository;
 
-import com.luizcasagrande.shoppingapi.dto.ShopReportDTO;
 import com.luizcasagrande.shoppingapi.model.Shop;
+import com.luizcasagrande.shoppingclient.dto.ShopReportDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

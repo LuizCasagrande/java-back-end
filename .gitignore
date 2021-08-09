@@ -21,3 +21,11 @@ shopping-api/mvnw
 shopping-api/mvnw.cmd
 shopping-api/.idea
 shopping-api/*.iml
+
+shopping-client/HELP.md
+shopping-client/target
+shopping-client/.mvn
+shopping-client/mvnw
+shopping-client/mvnw.cmd
+shopping-client/.idea
+shopping-client/*.iml

@@ -1,7 +1,7 @@
 package com.luizcasagrande.productapi.controller;
 
-import com.luizcasagrande.productapi.dto.ProductDTO;
 import com.luizcasagrande.productapi.service.ProductService;
+import com.luizcasagrande.shoppingclient.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

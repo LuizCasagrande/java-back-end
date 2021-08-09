@@ -1,6 +1,4 @@
-package com.luizcasagrande.shoppingapi.dto;
-
-import com.luizcasagrande.shoppingapi.model.Item;
+package com.luizcasagrande.shoppingclient.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,13 +9,6 @@ public class ItemDTO {
     private String productIdentifier;
     @NotNull
     private Float preco;
-
-    public static ItemDTO convert(Item item) {
-        ItemDTO dto = new ItemDTO();
-        dto.setProductIdentifier(item.getProductIdentifier());
-        dto.setPreco(item.getPreco());
-        return dto;
-    }
 
     public String getProductIdentifier() {
         return productIdentifier;
