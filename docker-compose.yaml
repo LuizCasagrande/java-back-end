@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   postgres:
@@ -40,7 +40,7 @@ services:
       POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      USER_API_URL: localhost:8080
-      PRODUCT_API_URL: localhost:8081
+      USER_API_URL: http://user:8080
+      PRODUCT_API_URL: http://product:8081
     depends_on:
       - postgres
