@@ -19,35 +19,35 @@ import java.util.stream.Collectors;
 public class ShopService {
 
     @Autowired
-    private ShopRepository repository;
+    private ShopRepository shopRepository;
     @Autowired
     private ProductService productService;
     @Autowired
     private UserService userService;
 
     public List<ShopDTO> getAll() {
-        List<Shop> compras = repository.findAll();
+        List<Shop> compras = shopRepository.findAll();
         return compras.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public List<ShopDTO> getByUser(String userIdentifier) {
-        List<Shop> compras = repository.findByUserIdentifier(userIdentifier);
+        List<Shop> compras = shopRepository.findByUserIdentifier(userIdentifier);
         return compras.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public List<ShopDTO> getByData(ShopDTO dto) {
-        List<Shop> compras = repository.findByDataGreaterThan(dto.getData());
+        List<Shop> compras = shopRepository.findByDataGreaterThan(dto.getData());
         return compras.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public ShopDTO findById(long productId) {
-        Optional<Shop> compra = repository.findById(productId);
+        Optional<Shop> compra = shopRepository.findById(productId);
         return compra.map(DTOConverter::convert).orElse(null);
     }
 
@@ -64,7 +64,7 @@ public class ShopService {
                 .reduce((float) 0, Float::sum));
 
         Shop shop = Shop.convert(dto);
-        shop = repository.save(shop);
+        shop = shopRepository.save(shop);
         return DTOConverter.convert(shop);
     }
 
@@ -80,7 +80,7 @@ public class ShopService {
     }
 
     public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
-        List<Shop> compras = repository.getShopByFilters(dataInicio, dataFim, valorMinimo);
+        List<Shop> compras = shopRepository.getShopByFilters(dataInicio, dataFim, valorMinimo);
         return compras.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
@@ -88,6 +88,6 @@ public class ShopService {
     }
 
     public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
-        return repository.getReportByDate(dataInicio, dataFim);
+        return shopRepository.getReportByDate(dataInicio, dataFim);
     }
 }

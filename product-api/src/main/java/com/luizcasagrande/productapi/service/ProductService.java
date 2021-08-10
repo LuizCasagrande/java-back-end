@@ -2,6 +2,7 @@ package com.luizcasagrande.productapi.service;
 
 import com.luizcasagrande.productapi.converter.DTOConverter;
 import com.luizcasagrande.productapi.model.Product;
+import com.luizcasagrande.productapi.repository.CategoryRepository;
 import com.luizcasagrande.productapi.repository.ProductRepository;
 import com.luizcasagrande.shoppingclient.dto.ProductDTO;
 import com.luizcasagrande.shoppingclient.exception.CategoryNotFoundException;
@@ -17,24 +18,26 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     @Autowired
-    private ProductRepository repository;
+    private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public List<ProductDTO> getAll() {
-        List<Product> produtos = repository.findAll();
+        List<Product> produtos = productRepository.findAll();
         return produtos.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public List<ProductDTO> getProductByCategoryId(long categoryId) {
-        List<Product> produtos = repository.getProductByCategoryId(categoryId);
+        List<Product> produtos = productRepository.getProductByCategoryId(categoryId);
         return produtos.stream()
                 .map(DTOConverter::convert)
                 .collect(Collectors.toList());
     }
 
     public ProductDTO findByProductIdentifier(String productIdentifier) {
-        Product produto = repository.findByProductIdentifier(productIdentifier);
+        Product produto = productRepository.findByProductIdentifier(productIdentifier);
         if (produto == null) {
             throw new ProductNotFoundException();
         }
@@ -42,17 +45,17 @@ public class ProductService {
     }
 
     public ProductDTO save(ProductDTO dto) {
-        boolean existsCategory = repository.existsById(dto.getCategory().getId());
+        boolean existsCategory = categoryRepository.existsById(dto.getCategory().getId());
         if (!existsCategory) {
             throw new CategoryNotFoundException();
         }
-        Product produto = repository.save(Product.convert(dto));
+        Product produto = productRepository.save(Product.convert(dto));
         return DTOConverter.convert(produto);
     }
 
     public void delete(long id) {
-        Optional<Product> produto = repository.findById(id);
-        produto.ifPresentOrElse(p -> repository.delete(p), () -> {
+        Optional<Product> produto = productRepository.findById(id);
+        produto.ifPresentOrElse(p -> productRepository.delete(p), () -> {
             throw new ProductNotFoundException();
         });
     }

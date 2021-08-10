@@ -15,31 +15,31 @@ import java.util.List;
 public class ShopController {
 
     @Autowired
-    private ShopService service;
+    private ShopService shopService;
 
     @GetMapping("/shopping")
     public List<ShopDTO> getShops() {
-        return service.getAll();
+        return shopService.getAll();
     }
 
     @GetMapping("/shopping/shop-by-user/{userIdentifier}")
     public List<ShopDTO> getByUser(@PathVariable String userIdentifier) {
-        return service.getByUser(userIdentifier);
+        return shopService.getByUser(userIdentifier);
     }
 
     @PostMapping("/shopping/shop-by-data")
     public List<ShopDTO> getByData(@RequestBody ShopDTO dto) {
-        return service.getByData(dto);
+        return shopService.getByData(dto);
     }
 
     @GetMapping("/shopping/{id}")
     public ShopDTO findById(@PathVariable Long id) {
-        return service.findById(id);
+        return shopService.findById(id);
     }
 
     @PostMapping("/shopping")
     public ShopDTO newShop(@Valid @RequestBody ShopDTO dto, @RequestHeader("key") String key) {
-        return service.save(dto, key);
+        return shopService.save(dto, key);
     }
 
     @GetMapping("/shopping/search")
@@ -48,7 +48,7 @@ public class ShopController {
                                           @RequestParam(name = "dataFim", required = false)
                                           @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim,
                                           @RequestParam(name = "valorMinimo", required = false) Float valorMinimo) {
-        return service.getShopsByFilter(dataInicio, dataFim, valorMinimo);
+        return shopService.getShopsByFilter(dataInicio, dataFim, valorMinimo);
     }
 
     @GetMapping("/shopping/report")
@@ -56,6 +56,6 @@ public class ShopController {
                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
                                          @RequestParam("dataFim")
                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim) {
-        return service.getReportByDate(dataInicio, dataFim);
+        return shopService.getReportByDate(dataInicio, dataFim);
     }
 }

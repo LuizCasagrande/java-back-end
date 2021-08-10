@@ -11,35 +11,35 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @GetMapping("/user")
     public List<UserDTO> getUsers() {
-        return service.getAll();
+        return userService.getAll();
     }
 
     @GetMapping("/user/{id}")
     public UserDTO findById(@PathVariable Long id) {
-        return service.findById(id);
+        return userService.findById(id);
     }
 
     @PostMapping("/user")
     public UserDTO newUser(@RequestBody UserDTO dto) {
-        return service.save(dto);
+        return userService.save(dto);
     }
 
     @GetMapping("/user/cpf/{cpf}")
     public UserDTO findByCpfAndKey(@PathVariable String cpf, @RequestParam("key") String key) {
-        return service.findByCpfAndKey(cpf, key);
+        return userService.findByCpfAndKey(cpf, key);
     }
 
     @DeleteMapping("/user/{id}")
     public void delete(@PathVariable Long id) {
-        service.delete(id);
+        userService.delete(id);
     }
 
     @GetMapping("/user/search")
     public List<UserDTO> queryByNome(@RequestParam("nome") String nome) {
-        return service.queryByNome(nome);
+        return userService.queryByNome(nome);
     }
 }
