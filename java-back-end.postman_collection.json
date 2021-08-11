@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "4c93c024-067a-4595-8a2c-21a9d50a92fe",
+		"name": "java-back-end",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/user/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/user/cpf/123?key=92078aa8-7cd2-4cde-a891-c0b32273a37e",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"user",
+						"cpf",
+						"123"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "92078aa8-7cd2-4cde-a891-c0b32273a37e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/user/search?nome=luiz",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"user",
+						"search"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "luiz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nome\": \"luiz\",\r\n\t\"cpf\": \"123\",\r\n\t\"endereco\": \"rua sla\",\r\n\t\"email\": \"luiz@email.com\",\r\n    \"telefone\": \"9999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/user/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/product/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/product/tv",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"product",
+						"tv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/product/category/1",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"product",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"tv\",\r\n    \"preco\": 1050.60,\r\n    \"descricao\": \"tv\",\r\n    \"productIdentifier\": \"tv\",\r\n    \"category\": {\r\n        \"id\": 1\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/product/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shops",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/shopping/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"shopping",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shopping Report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/shopping/report?dataInicio=01/01/2021&dataFim=01/01/2021",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"shopping",
+						"report"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "01/01/2021"
+						},
+						{
+							"key": "dataFim",
+							"value": "01/01/2021"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shopping Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/shopping/search?dataInicio=01/01/2021&valorMinimo=100",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"shopping",
+						"search"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "01/01/2021"
+						},
+						{
+							"key": "valorMinimo",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Shop",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "key",
+						"value": "92078aa8-7cd2-4cde-a891-c0b32273a37e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userIdentifier\": \"123\",\r\n    \"itens\": [\r\n        {\r\n            \"productIdentifier\": \"tv\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/shopping/",
+					"host": [
+						"shopping.com"
+					],
+					"path": [
+						"shopping",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
